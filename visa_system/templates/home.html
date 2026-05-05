@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients</title>
+</head>
+<body>
+
+<h2>Clients</h2>
+
+<form method="GET">
+    <input type="text" name="q" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+
+<a href="/add/">Add Client</a>
+
+<hr>
+
+{% for client in clients %}
+    <div>
+        <h3>{{ client.full_name }}</h3>
+        <p>{{ client.passport_number }}</p>
+        <p>{{ client.phone }}</p>
+
+        <img src="{{ client.photo.url }}" width="100">
+        <img src="{{ client.passport_image.url }}" width="100">
+    </div>
+    <hr>
+{% endfor %}
+
+</body>
+</html>
