@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Client
 
-clients = Client.objects.filter(
-    full_name__icontains=query
-) | Client.objects.filter(
-    passport_number__icontains=query
-) | Client.objects.filter(
-    phone__icontains=query
-)
+def home(request):
+    query = request.GET.get('q')
+
+    if query:
+        clients = Client.objects.filter(full_name__icontains=query)
+    else:
+        clients = Client.objects.all()
+
+    return render(request, 'home.html', {'clients': clients})
 
 
 def add_client(request):
